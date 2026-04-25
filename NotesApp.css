@@ -1,4 +1,4 @@
-/* It's about Notes App Project. */
+/* Responsive Notes App Styles */
 
 *{
     margin: 0;
@@ -8,24 +8,26 @@
 }
 
 .container{
-    width: 100%; /*It's a size relative to an element's parent object.*/
-    height: 100vh; /*Relative to 1% of viewport height.*/
+    width: 100%;
+    /* Changed height to min-height so the background grows with notes */
+    min-height: 100vh; 
     background: linear-gradient(135deg, #bb80f2, #95c0ff);
     color: #fff;
-    padding-top: 4%;
-    padding-left: 10%;
+    /* clamp is for responsive spacing instead of fixed percentages */
+    padding: clamp(20px, 5vw, 60px) clamp(15px, 10vw, 10%);
 }
 
 .container h1{
     display: flex;
     align-items: center;
-    font-size: 35px;
+    font-size: clamp(28px, 5vw, 35px);
     font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.container button img{
-    width: 25px;
-    margin-right: 8px;
+.container h1 img{
+    width: 40px; /* Adjust as needed for logo */
+    margin-right: 10px;
 }
 
 .container button{
@@ -39,25 +41,58 @@
     border-radius: 40px;
     padding: 15px 25px;
     cursor: pointer;
+    margin-bottom: 30px;
+    transition: transform 0.2s;
+}
+
+.container button:active {
+    transform: scale(0.98);
+}
+
+.container button img{
+    width: 25px;
+    margin-right: 8px;
 }
 
 .input-box{
     position: relative;
     width: 100%;
+    /* Allows notes to sit side-by-side on desktop but stack on mobile */
     max-width: 500px;
     min-height: 150px;
     background: #fff;
     color: #333;
-    padding: 20px;
-    margin: 20px;
+    padding: 20px 20px 50px; /* Added bottom padding so text doesn't hide behind the trash icon */
+    margin: 20px 0;
     outline: none;
     border-radius: 5px;
+    word-wrap: break-word; /* Ensures long text doesn't overflow the box */
 }
 
 .input-box img{
-    width: 25px;
-    position:absolute;
+    width: 20px;
+    position: absolute;
     bottom: 15px;
     right: 15px;
     cursor: pointer;
+}
+
+/* Tablet and Mobile Optimization */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container h1 {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .input-box {
+        margin: 15px 0;
+        max-width: 100%; /* Take full width on mobile */
+    }
 }
