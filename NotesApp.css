@@ -9,12 +9,12 @@
 
 .container{
     width: 100%;
-    /* Changed height to min-height so the background grows with notes */
+    /* Use min-height so the background extends if you have many notes */
     min-height: 100vh; 
     background: linear-gradient(135deg, #bb80f2, #95c0ff);
     color: #fff;
-    /* clamp is for responsive spacing instead of fixed percentages */
-    padding: clamp(20px, 5vw, 60px) clamp(15px, 10vw, 10%);
+    /* Responsive padding: smaller on mobile, larger on desktop */
+    padding: clamp(20px, 5vh, 60px) clamp(15px, 10vw, 10%);
 }
 
 .container h1{
@@ -22,12 +22,12 @@
     align-items: center;
     font-size: clamp(28px, 5vw, 35px);
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .container h1 img{
-    width: 40px; /* Adjust as needed for logo */
-    margin-right: 10px;
+    width: 40px;
+    margin-right: 12px;
 }
 
 .container button{
@@ -42,11 +42,6 @@
     padding: 15px 25px;
     cursor: pointer;
     margin-bottom: 30px;
-    transition: transform 0.2s;
-}
-
-.container button:active {
-    transform: scale(0.98);
 }
 
 .container button img{
@@ -57,42 +52,50 @@
 .input-box{
     position: relative;
     width: 100%;
-    /* Allows notes to sit side-by-side on desktop but stack on mobile */
     max-width: 500px;
     min-height: 150px;
     background: #fff;
     color: #333;
-    padding: 20px 20px 50px; /* Added bottom padding so text doesn't hide behind the trash icon */
+    padding: 20px;
+    /* Padding-right increased to 50px to keep text away from the delete icon */
+    padding-right: 50px; 
     margin: 20px 0;
     outline: none;
     border-radius: 5px;
-    word-wrap: break-word; /* Ensures long text doesn't overflow the box */
+    
+    /* CRITICAL: These properties prevent text from going outside the box */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap; 
+    overflow-y: auto;
 }
 
 .input-box img{
-    width: 20px;
+    width: 22px;
     position: absolute;
     bottom: 15px;
     right: 15px;
     cursor: pointer;
 }
 
-/* Tablet and Mobile Optimization */
+/* Mobile View Optimization */
 @media (max-width: 600px) {
     .container {
-        padding: 30px 20px;
+        /* Centering the UI for a better mobile experience */
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 30px 15px;
     }
 
     .container h1 {
-        text-align: center;
         justify-content: center;
+        text-align: center;
     }
 
     .input-box {
+        /* Forces the note to stay within the mobile screen width */
+        max-width: 100%; 
         margin: 15px 0;
-        max-width: 100%; /* Take full width on mobile */
     }
 }
